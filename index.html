@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Field Treasure</title>
+  </head>
+  <body>
+    <main>
+      <table class="score-board">
+        <caption class="game-title">
+          GREATEST TREASURE
+        </caption>
+        <tr>
+          <th id="score-label" class="score-board">YOUR SCORE</th>
+          <th id="high-score-label" class="score-board">HIGH SCORE</th>
+        </tr>
+        <tr>
+          <td id="score" class="score-board">T0</td>
+          <td id="high-score" class="score-board">T0</td>
+        </tr>
+      </table>
+      <div class="field-row">
+        <section class="field player--0">
+          <h2 class="field-name" id="name--0">Field A</h2>
+          <p class="bid field-info" id="bidA">No Bid</p>
+          <div class="field-image-div">
+            <img
+              src="Field_Earth2.jpg"
+              alt="Earth A"
+              class="earth field-image"
+              id="earthAImg"
+            />
+            <img
+              src="FieldA_Grass.jpg"
+              alt="Grass A"
+              class="grass field-image"
+              id="grassAImg"
+            />
+          </div>
+          <p class="value field-info" id="valueA">Value: ?</p>
+        </section>
+        <section class="field player--1">
+          <h2 class="field-name" id="name--1">Field B</h2>
+          <p class="bid field-info" id="bidB">Your Bid: T10</p>
+          <div class="field-image-div">
+            <img
+              src="Field_Earth1.jpg"
+              alt="Earth B"
+              class="earth field-image"
+              id="earthBImg"
+            />
+            <img
+              src="FieldB_Grass.jpg"
+              alt="Grass B"
+              class="grass field-image"
+              id="grassBImg"
+            />
+          </div>
+          <p class="value field-info" id="valueB">Value: ?</p>
+        </section>
+      </div>
+      <div class="field-row">
+        <section class="field player--2">
+          <h2 class="field-name" id="name--2">Field C</h2>
+          <p class="bid field-info" id="bidC">Game Bid: T5</p>
+          <div class="field-image-div">
+            <img
+              src="Field_Earth4.jpg"
+              alt="Earth C"
+              class="earth field-image"
+              id="earthCImg"
+            />
+            <img
+              src="FieldC_Grass.jpg"
+              alt="Grass C"
+              class="grass field-image"
+              id="grassCImg"
+            />
+          </div>
+          <p class="value field-info" id="valueC">Value: ?</p>
+        </section>
+        <section class="field player--3">
+          <h2 class="field-name" id="name--3">Field D</h2>
+          <p class="bid field-info" id="bidD">Your Bid: T20</p>
+          <div class="field-image-div">
+            <img
+              src="Field_Earth3.jpg"
+              alt="Earth D"
+              class="earth field-image"
+              id="earthDImg"
+            />
+            <img
+              src="FieldD_Grass.jpg"
+              alt="Grass D"
+              class="grass field-image"
+              id="grassDImg"
+            />
+          </div>
+          <p class="value field-info" id="valueD">Value: ?</p>
+        </section>
+      </div>
+
+      <button class="btn btn--new">🔄 New game</button>
+      <button class="btn btn--status">👉your turn</button>
+      <button class="btn btn--bid">☝ Bid (+T5)</button>
+      <button class="btn btn--peek">👁 Peek (Cost: T20)</button>
+      <button class="btn btn--pass">✔ Pass</button>
+      <table>
+        <caption>
+          Financials
+        </caption>
+        <tr>
+          <th>Current Assets</th>
+          <td id="current-assets">Current Assets</td>
+        </tr>
+        <tr>
+          <th>Exposure</th>
+          <td id="exposure">Exposure</td>
+        </tr>
+        <tr>
+          <th>Potential Minimum Assets</th>
+          <td id="potential-minimum-assets">Potential Minimum Assets</td>
+        </tr>
+      </table>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
