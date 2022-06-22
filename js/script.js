@@ -46,8 +46,8 @@ class Field {
     this.grassImgSlot = document.getElementById(`grass${nameLetter}Img`);
     this.bidValueSlot = document.getElementById(`bid${nameLetter}`);
     this.fieldValueSlot = document.getElementById(`value${nameLetter}`);
-    this.earthImgSource = `Field_Earth${earthNumber}.jpg`;
-    this.grassImgSource = `Field${nameLetter}_Grass.jpg`;
+    this.earthImgSource = `images/Field_Earth${earthNumber}.jpg`;
+    this.grassImgSource = `images/Field${nameLetter}_Grass.jpg`;
     this.fieldValue = fieldValues[earthNumber - 1];
     this.bidPerson = null;
     this.bidValue = 0;
@@ -137,7 +137,10 @@ function displayValue(field) {
 }
 
 function displayEarth(field) {
-  field.earthImgSlot.src = `${field.earthImgSlot.baseURI}${field.earthImgSource}`;
+  field.earthImgSlot.src = `${field.earthImgSlot.baseURI.slice(0, -10)}${
+    field.earthImgSource
+  }`;
+  console.log(field.earthImgSlot.src);
 }
 
 function displayFinancialPosition() {
