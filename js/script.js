@@ -137,9 +137,7 @@ function displayValue(field) {
 }
 
 function displayEarth(field) {
-  field.earthImgSlot.src = `${field.earthImgSlot.baseURI.slice(0, -10)}${
-    field.earthImgSource
-  }`;
+  field.earthImgSlot.src = `${field.earthImgSlot.baseURI}${field.earthImgSource}`;
   console.log(field.earthImgSlot.src);
 }
 
