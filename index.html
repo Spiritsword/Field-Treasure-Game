@@ -9,10 +9,10 @@
   </head>
   <body>
     <main>
+      <div class="game-title">
+        <p>GREATEST TREASURE</p>
+      </div>
       <table class="score-board">
-        <caption class="game-title">
-          GREATEST TREASURE
-        </caption>
         <tr>
           <th id="score-label" class="score-board">YOUR SCORE</th>
           <th id="high-score-label" class="score-board">HIGH SCORE</th>
@@ -102,13 +102,14 @@
           <p class="value field-info" id="valueD">Value: ?</p>
         </section>
       </div>
-
-      <button class="btn btn--new">🔄 New game</button>
-      <button class="btn btn--status">👉your turn</button>
-      <button class="btn btn--bid">☝ Bid (+T5)</button>
-      <button class="btn btn--peek">👁 Peek (Cost: T20)</button>
-      <button class="btn btn--pass">✔ Pass</button>
-      <table>
+      <div class="buttons">
+        <button class="btn btn--new">🔄 New game</button>
+        <button class="btn btn--status">👉your turn</button>
+        <button class="btn btn--bid">☝ Bid (+T5)</button>
+        <button class="btn btn--peek">👁 Peek (Cost: T20)</button>
+        <button class="btn btn--pass">✔ Pass</button>
+      </div>
+      <table class="financials">
         <caption>
           Financials
         </caption>
