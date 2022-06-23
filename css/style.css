@@ -10,7 +10,7 @@
   }
 
   html {
-    font-size: 1vmin;
+    font-size: 0.8vmax;
     box-sizing: border-box;
   }
 
@@ -147,7 +147,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 3;
   }
 
   .btn {
@@ -166,9 +165,21 @@
     backdrop-filter: blur(10px);
 
     padding: 0.7rem 1.5rem;
-    margin: 2.7rem;
+    margin: 2rem;
     border-radius: 50rem;
     box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer middle {
+  .score-board {
+    text-align: center;
+    height: 0vh;
+  }
+
+  .btn--selectable:active {
+    transform: translateY(40%);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
   .btn::first-letter {
@@ -198,24 +209,12 @@
     z-index: 3;
   }
 
-  .btn:active {
-    transform: translate(-50%, 3px);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-  }
-
   .btn:focus {
     outline: none;
   }
 
   .hidden {
     display: none;
-  }
-}
-
-@layer middle {
-  .score-board {
-    text-align: center;
-    height: 0vh;
   }
 
   .game-title {
@@ -235,7 +234,7 @@
   }
 
   .field-info {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 300;
     color: white;
     margin-bottom: auto;
