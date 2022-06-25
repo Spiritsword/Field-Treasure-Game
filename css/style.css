@@ -261,7 +261,7 @@
   }
 
   .field-image {
-    width: 19rem;
+    width: 17rem;
   }
   /*
   .grass {
@@ -271,22 +271,22 @@
   }
 */
   .btn--selectable:active {
-    transform: translateY(-180%);
+    transform: translateY(-110%);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
   .btn {
     position: static;
-    transform: translateY(-190%);
+    transform: translateY(-120%);
     margin: 3rem;
   }
 
   .btn--alert {
     position: static;
-    transform: translateY(-40%);
+    transform: translateY(-30%);
   }
 
-  .field-info {
+  .bid {
     font-size: 2rem;
     height: 6rem;
     text-align: center;
@@ -294,7 +294,7 @@
 
   .field-row {
     max-height: 33vh;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .financials {
