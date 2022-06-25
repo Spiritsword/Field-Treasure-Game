@@ -255,18 +255,18 @@
   }
 
   .field-image {
-    width: 20rem;
+    width: 19rem;
   }
 
   .btn--selectable:active {
-    transform: translateY(-40%);
+    transform: translateY(-180%);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
   .btn {
     position: static;
-    transform: translateY(-200%);
-    margin: 1.9rem;
+    transform: translateY(-185%);
+    margin: 2.2rem;
   }
 
   .btn--alert {
@@ -275,6 +275,20 @@
   }
 
   .field-info {
-    font-size: 1.4rem;
+    font-size: 2rem;
+    height: 6rem;
+    text-align: center;
+  }
+
+  .field-row {
+    max-height: 33vh;
+  }
+
+  .financials {
+    max-height: 10vh;
+  }
+
+  .field-row {
+    transform: translateY(10%);
   }
 }
