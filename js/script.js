@@ -2,7 +2,7 @@
 
 // Declarations
 
-//Player tallies and assets
+// Player tallies and assets
 
 const cAssetsSlot = document.getElementById('current-assets');
 const exposureSlot = document.getElementById('exposure');
@@ -27,7 +27,7 @@ peekButton.innerText = `👁 Peek (Cost: T${peekCost})`;
 alertButton.style.opacity = 0;
 alertButton.classList.remove('invisible');
 
-//Game tallies and assets
+// Game tallies and assets
 let scoreValue = 0;
 let highScoreValue = 0;
 let cAssetsValueGame = 100;
@@ -35,7 +35,7 @@ let exposureValueGame = 0;
 let pMinAssetsValueGame = 100;
 let knownFieldsGame = [];
 
-//General tallies and assets
+// General tallies and assets
 
 let state = 'Player';
 let passes = 0;
@@ -87,7 +87,7 @@ function initialise() {
   exposureValueGame = 0;
   pMinAssetsValueGame = 100;
 
-  //lay objects randomly
+  // Lay objects randomly
 
   let earthNumbers = [1, 2, 3, 4];
   for (const letter of ['A', 'B', 'C', 'D']) {
@@ -96,7 +96,7 @@ function initialise() {
     fieldLookUp[letter] = new Field(letter, earthNumber);
   }
 
-  //Set up initial display
+  // Set up initial display
 
   for (const letter of ['A', 'B', 'C', 'D']) {
     const field = fieldLookUp[letter];
@@ -109,11 +109,11 @@ function initialise() {
 
   alertButton.style.opacity = 0;
 
-  //Set up Player turn
+  // Set up Player turn
 
   setUpPlayer();
 
-  //Display functions
+  // Display functions
 
   function displayBid(field) {
     if (field.bidPerson == null) {
@@ -144,7 +144,7 @@ function initialise() {
     pMinAssetsSlot.innerText = `T${pMinAssetsValuePlayer}`;
   }
 
-  //Player functions
+  // Player functions
 
   function setUpPlayer() {
     state = 'Player';
@@ -291,7 +291,6 @@ let gamePlay = function () {
     kTF.bidValue + 5 <= pMinAssetsValueGame
   ) {
     gameBidField(kTF);
-    //passFunction.bind(null, 'Player', [], [], []);
     return;
   } else {
     let randomCoin = Math.random();
@@ -401,7 +400,7 @@ function gamePeekField(field) {
   switchPlayerTo('Player', [], [], []);
 }
 
-//General helper functions
+// General helper functions
 
 function setButtons() {
   bidButton.addEventListener('click', bidFunction);
@@ -489,7 +488,7 @@ function switchPlayerTo(person, slotArray, valueArray, imageArray) {
 function ripenBids(person, slotArray, valueArray, imageArray) {
   for (const letter of ['A', 'B', 'C', 'D']) {
     const field = fieldLookUp[letter];
-    //Check for sold fields
+    // Check for sold fields
     if (field.bidPerson == person && !field.sold) {
       field.going++;
       if (field.going > 2) {
@@ -513,7 +512,7 @@ function ripenBids(person, slotArray, valueArray, imageArray) {
             valueArray.push(`Field Value: T${field.fieldValue}`);
           }
         }
-        //Increase 'goings' of bid but unsold fields.
+        // Increase 'goings' of bid but unsold fields.
       } else {
         if (person == 'Game') {
           switch (field.going) {
