@@ -107,11 +107,42 @@ function initialise() {
   }
   displayFinancialPosition();
 
-  //alertButton.style.opacity = 0;
+  alertButton.style.opacity = 0;
 
   //Set up Player turn
 
   setUpPlayer();
+
+  //Display functions
+
+  function displayBid(field) {
+    if (field.bidPerson == null) {
+      field.bidValueSlot.innerText = 'No bid';
+    } else if (field.bidPerson == 'Player') {
+      field.bidValueSlot.innerText = `Your bid: T${field.bid}`;
+    } else {
+      field.bidValueSlot.text = `Game bid: T${field.bid}`;
+    }
+  }
+
+  function displayValue(field) {
+    if (field.viewed == false) {
+      field.fieldValueSlot.innerText = 'Field Value: ?';
+    } else {
+      field.fieldValueSlot.innerText = `Field Value: T${field.bidValue}`;
+    }
+  }
+
+  function displayEarth(field) {
+    field.earthImgSlot.src = `${field.earthImgSlot.baseURI}${field.earthImgSource}`;
+    console.log(field.earthImgSlot.src);
+  }
+
+  function displayFinancialPosition() {
+    cAssetsSlot.innerText = `T${cAssetsValuePlayer}`;
+    exposureSlot.innerText = `T${exposureValuePlayer}`;
+    pMinAssetsSlot.innerText = `T${pMinAssetsValuePlayer}`;
+  }
 
   //Player functions
 
@@ -122,61 +153,6 @@ function initialise() {
     scoreSlot.innerText = 'T0';
     statusButton.innerText = '👉your turn';
   }
-}
-
-function displayBid(field) {
-  if (field.bidPerson == null) {
-    field.bidValueSlot.innerText = 'No bid';
-  } else if (field.bidPerson == 'Player') {
-    field.bidValueSlot.innerText = `Your bid: T${field.bid}`;
-  } else {
-    field.bidValueSlot.text = `Game bid: T${field.bid}`;
-  }
-}
-
-function displayValue(field) {
-  if (field.viewed == false) {
-    field.fieldValueSlot.innerText = 'Field Value: ?';
-  } else {
-    field.fieldValueSlot.innerText = `Field Value: T${field.bidValue}`;
-  }
-}
-
-function displayEarth(field) {
-  field.earthImgSlot.src = `${field.earthImgSlot.baseURI}${field.earthImgSource}`;
-  console.log(field.earthImgSlot.src);
-}
-
-function displayFinancialPosition() {
-  cAssetsSlot.innerText = `T${cAssetsValuePlayer}`;
-  exposureSlot.innerText = `T${exposureValuePlayer}`;
-  pMinAssetsSlot.innerText = `T${pMinAssetsValuePlayer}`;
-}
-
-function peekFunction() {
-  alertButton.style.opacity = 0;
-  if (pMinAssetsValuePlayer - peekCost < 0) {
-    alertButton.innerText = '🚫Insufficient funds. Click a button.';
-    alertButton.style.opacity = 1;
-    return;
-  }
-  setFieldListeners(fieldPeek);
-  freezeButtons();
-  alertButton.innerText = '👉Please now select field.';
-  alertButton.style.opacity = 1;
-}
-
-function bidFunction() {
-  alertButton.style.opacity = 0;
-  if (pMinAssetsValuePlayer - 5 < 0) {
-    alertButton.innerText = '🚫Insufficient funds. Click a button.';
-    alertButton.style.opacity = 1;
-    return;
-  }
-  setFieldListeners(fieldBid);
-  freezeButtons();
-  alertButton.innerText = '👉Please now select field.';
-  alertButton.style.opacity = 1;
 }
 
 function setFieldListeners(fun) {
@@ -200,6 +176,19 @@ function findField(grassImgSlot) {
       return field;
     }
   }
+}
+
+function bidFunction() {
+  alertButton.style.opacity = 0;
+  if (pMinAssetsValuePlayer - 5 < 0) {
+    alertButton.innerText = '🚫Insufficient funds. Click a button.';
+    alertButton.style.opacity = 1;
+    return;
+  }
+  setFieldListeners(fieldBid);
+  freezeButtons();
+  alertButton.innerText = '👉Please now select field.';
+  alertButton.style.opacity = 1;
 }
 
 function fieldBid(event) {
@@ -249,6 +238,19 @@ function fieldBid(event) {
   switchPlayerTo('Game', slotArray, valueArray, imageArray);
 }
 
+function peekFunction() {
+  alertButton.style.opacity = 0;
+  if (pMinAssetsValuePlayer - peekCost < 0) {
+    alertButton.innerText = '🚫Insufficient funds. Click a button.';
+    alertButton.style.opacity = 1;
+    return;
+  }
+  setFieldListeners(fieldPeek);
+  freezeButtons();
+  alertButton.innerText = '👉Please now select field.';
+  alertButton.style.opacity = 1;
+}
+
 function fieldPeek(event) {
   const grassImgSlot = event.target;
   let selectedField = findField(grassImgSlot);
@@ -279,7 +281,7 @@ function fieldPeek(event) {
   switchPlayerTo('Game', slotArray, valueArray, imageArray);
 }
 
-// Game play functions
+// 'Game' play functions
 
 let gamePlay = function () {
   const kTF = gameKnownTreasureField();
@@ -360,6 +362,25 @@ function gameBid() {
   return true;
 }
 
+function gameBidField(field) {
+  let slotArray = [];
+  let valueArray = [];
+  if (field.bidPerson == 'Player') {
+    exposureValuePlayer -= field.bidValue;
+    pMinAssetsValuePlayer += field.bidValue;
+    field.going = 0;
+  }
+  field.bidPerson = 'Game';
+  field.bidValue += 5;
+  field.going = 0;
+  exposureValueGame += field.bidValue;
+  pMinAssetsValueGame -= field.bidValue;
+  slotArray.push(field.bidValueSlot);
+  valueArray.push(`Game bid: T${field.bidValue}`);
+  passes = 0;
+  switchPlayerTo('Player', slotArray, valueArray, []);
+}
+
 function gamePeek() {
   const listNotKnown = fieldValueNotKnownGameArray();
   let chosenField;
@@ -378,25 +399,6 @@ function gamePeekField(field) {
   field.gameViewed = true;
   passes = 0;
   switchPlayerTo('Player', [], [], []);
-}
-
-function gameBidField(field) {
-  let slotArray = [];
-  let valueArray = [];
-  if (field.bidPerson == 'Player') {
-    exposureValuePlayer -= field.bidValue;
-    pMinAssetsValuePlayer += field.bidValue;
-    field.going = 0;
-  }
-  field.bidPerson = 'Game';
-  field.bidValue += 5;
-  field.going = 0;
-  exposureValueGame += field.bidValue;
-  pMinAssetsValueGame -= field.bidValue;
-  slotArray.push(field.bidValueSlot);
-  valueArray.push(`Game bid: T${field.bidValue}`);
-  passes = 0;
-  switchPlayerTo('Player', slotArray, valueArray, []);
 }
 
 //General helper functions
@@ -487,6 +489,7 @@ function switchPlayerTo(person, slotArray, valueArray, imageArray) {
 function ripenBids(person, slotArray, valueArray, imageArray) {
   for (const letter of ['A', 'B', 'C', 'D']) {
     const field = fieldLookUp[letter];
+    //Check for sold fields
     if (field.bidPerson == person && !field.sold) {
       field.going++;
       if (field.going > 2) {
@@ -510,6 +513,7 @@ function ripenBids(person, slotArray, valueArray, imageArray) {
             valueArray.push(`Field Value: T${field.fieldValue}`);
           }
         }
+        //Increase 'goings' of bid but unsold fields.
       } else {
         if (person == 'Game') {
           switch (field.going) {
@@ -620,5 +624,3 @@ let recursiveTimeoutFadeIn = function (op, slotArray, valueArray, callback) {
     10
   );
 };
-
-function nullFunction() {}

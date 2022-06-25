@@ -62,6 +62,8 @@
     text-align: left;
   }
 
+  /* FIELD ELEMENTS */
+
   .field-row {
     flex: 50%;
     height: 35vh;
@@ -114,6 +116,7 @@
   }
 
   /* BUTTON ELEMENTS */
+
   .buttons {
     position: absolute;
     width: 100%;
@@ -151,6 +154,8 @@
     margin-right: 0.7rem;
   }
 }
+
+/* MISCELLANEOUS OVERRIDES */
 
 @layer middle {
   .invisible {
@@ -206,10 +211,6 @@
 
   .btn:focus {
     outline: none;
-  }
-
-  .hidden {
-    display: none;
   }
 
   .game-title {
