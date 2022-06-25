@@ -14,6 +14,7 @@ let cAssetsValuePlayer = 100;
 let exposureValuePlayer = 0;
 let pMinAssetsValuePlayer = 100;
 
+const alertButton = document.querySelector('.btn--alert');
 const newButton = document.querySelector('.btn--new');
 const statusButton = document.querySelector('.btn--status');
 const bidButton = document.querySelector('.btn--bid');
@@ -22,6 +23,9 @@ const passButton = document.querySelector('.btn--pass');
 
 const peekCost = 20;
 peekButton.innerText = `👁 Peek (Cost: T${peekCost})`;
+
+alertButton.style.opacity = 0;
+alertButton.classList.remove('invisible');
 
 //Game tallies and assets
 let scoreValue = 0;
@@ -103,6 +107,8 @@ function initialise() {
   }
   displayFinancialPosition();
 
+  //alertButton.style.opacity = 0;
+
   //Set up Player turn
 
   setUpPlayer();
@@ -148,23 +154,29 @@ function displayFinancialPosition() {
 }
 
 function peekFunction() {
+  alertButton.style.opacity = 0;
   if (pMinAssetsValuePlayer - peekCost < 0) {
-    alert('Insufficient funds. Select another Option!');
+    alertButton.innerText = '🚫Insufficient funds. Click a button.';
+    alertButton.style.opacity = 1;
     return;
   }
   setFieldListeners(fieldPeek);
   freezeButtons();
-  alert('Please now select field.');
+  alertButton.innerText = '👉Please now select field.';
+  alertButton.style.opacity = 1;
 }
 
 function bidFunction() {
+  alertButton.style.opacity = 0;
   if (pMinAssetsValuePlayer - 5 < 0) {
-    alert('Insufficient funds. Select another Option!');
+    alertButton.innerText = '🚫Insufficient funds. Click a button.';
+    alertButton.style.opacity = 1;
     return;
   }
   setFieldListeners(fieldBid);
   freezeButtons();
-  alert('Please now select field.');
+  alertButton.innerText = '👉Please now select field.';
+  alertButton.style.opacity = 1;
 }
 
 function setFieldListeners(fun) {
@@ -196,25 +208,28 @@ function fieldBid(event) {
   removeFieldListeners(fieldBid);
   if (selectedField.bidPerson == 'Player') {
     if (selectedField.sold) {
-      alert('You already own this field. Please click on a button.');
+      alertButton.innerText = '🚫Already sold. Click a button.';
+      alertButton.style.opacity = 1;
     } else {
-      alert(
-        'You already have top bid for this field. Please click on a button.'
-      );
+      alertButton.innerText = '🚫Top bid is yours already. Click a button.';
+      alertButton.style.opacity = 1;
     }
     setButtons();
     return;
   }
-  if (selectedField.bidPerson == 'Game' && selectedField.sold) {
-    alert('This field has already been sold. Please click on a button.');
+  if (selectedField.sold) {
+    alertButton.innerText = '🚫Already sold. Click a button.';
+    alertButton.style.opacity = 1;
     setButtons();
     return;
   }
   if (pMinAssetsValuePlayer - (selectedField.bidValue + 5) < 0) {
-    alert('Insufficient funds. Select another option!');
+    alertButton.innerText = '🚫Insufficient funds. Click a button.';
+    alertButton.style.opacity = 1;
     setButtons();
     return;
   }
+  alertButton.style.opacity = 0;
   freezeNewButton();
   let slotArray = [];
   let valueArray = [];
@@ -238,20 +253,19 @@ function fieldPeek(event) {
   const grassImgSlot = event.target;
   let selectedField = findField(grassImgSlot);
   removeFieldListeners(fieldPeek);
-  if (selectedField.bidPerson === 'Game' && selectedField.sold) {
-    alert(
-      'This field has been sold to someone else. You cannot peek in it. Please click on a button.'
-    );
+  if (selectedField.sold) {
+    alertButton.innerText = `🚫Already sold. Can't peek. Click a button.`;
+    alertButton.style.opacity = 1;
     setButtons();
     return;
   }
   if (selectedField.viewed) {
-    alert(
-      'You already know the value of this field. Please click on a button.'
-    );
+    alertButton.innerText = '🚫Already peeked. Click a button.';
+    alertButton.style.opacity = 1;
     setButtons();
     return;
   }
+  alertButton.style.opacity = 0;
   freezeNewButton();
   let slotArray = [];
   let valueArray = [];
@@ -282,7 +296,6 @@ let gamePlay = function () {
     if (randomCoin > 0.5) {
       if (!gameBid()) {
         if (!gamePeek()) {
-          console.log`game bid peek pass`;
           passFunction('Player');
           return;
         }
@@ -290,7 +303,6 @@ let gamePlay = function () {
     } else {
       if (!gamePeek()) {
         if (!gameBid()) {
-          console.log`game peek bid pass`;
           passFunction('Player');
           return;
         }
@@ -339,7 +351,6 @@ function fieldValueNotKnownGameArray() {
 function gameBid() {
   const listCanBid = fieldCanBid();
   let chosenField;
-  console.log(`listCanBid = ${listCanBid}`);
   if (listCanBid.length == 0) {
     return false;
   } else {
@@ -413,20 +424,14 @@ function freezeNewButton() {
 function bidsDead() {
   for (const letter of ['A', 'B', 'C', 'D']) {
     const field = fieldLookUp[letter];
-    console.log(`letter = ${letter}`);
-    console.log(`field.bidPerson = ${field.bidPerson}`);
-    console.log(`field.sold = ${field.sold}`);
     if (field.bidPerson && !field.sold) {
-      console.log(`bidsDead = false`);
       return false;
     }
   }
-  console.log(`bidsDead = true`);
   return true;
 }
 
 function switchPlayerTo(person, slotArray, valueArray, imageArray) {
-  console.log(`switchPlayerto ${person}`);
   [slotArray, valueArray, imageArray] = ripenBids(
     person,
     slotArray,
@@ -483,11 +488,7 @@ function ripenBids(person, slotArray, valueArray, imageArray) {
   for (const letter of ['A', 'B', 'C', 'D']) {
     const field = fieldLookUp[letter];
     if (field.bidPerson == person && !field.sold) {
-      console.log(
-        `Increment ${letter} ${field.bidPerson} ${person} going: ${field.going}`
-      );
       field.going++;
-      console.log(`going: ${field.going}`);
       if (field.going > 2) {
         field.sold = true;
         if (person == 'Game') {
@@ -507,7 +508,6 @@ function ripenBids(person, slotArray, valueArray, imageArray) {
             imageArray.push(field.grassImgSlot);
             slotArray.push(field.fieldValueSlot);
             valueArray.push(`Field Value: T${field.fieldValue}`);
-            field.viewed = true;
           }
         }
       } else {
@@ -549,15 +549,14 @@ function passFunctionToGame() {
 }
 
 function passFunction(person) {
+  alertButton.style.opacity = 0;
   freezeButtons();
-  console.log(`Pass to ${person}`);
   passes++;
-  console.log(`passes ${passes}`);
+  console.log(`passes = ${passes}`);
   switchPlayerTo(person, [], [], []);
 }
 
 function transition(slotArray, valueArray, imageArray, callback) {
-  console.log(`callback from transition ${callback}`);
   recursiveTimeoutFadeOut(1, slotArray, valueArray, imageArray, callback);
 }
 
@@ -568,11 +567,8 @@ let recursiveTimeoutFadeOut = function (
   imageArray,
   callback
 ) {
-  console.log(`In fadeOut. Op =  ${op}`);
   if (op < 0.01) {
-    console.log(`callback from fadeOut1 ${callback}`);
     setTimeout(function () {
-      console.log(`callback from fadeOut2 ${callback}`);
       fadeIn(slotArray, valueArray, callback);
     }, 500);
     return;
@@ -607,7 +603,6 @@ function fadeIn(slotArray, valueArray, callback) {
 
 let recursiveTimeoutFadeIn = function (op, slotArray, valueArray, callback) {
   if (op >= 1) {
-    console.log(`callback from fadeIn ${callback}`);
     callback();
     return;
   }

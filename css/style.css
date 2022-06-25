@@ -113,31 +113,6 @@
     z-index: 2;
   }
 
-  .player--active {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-  .player--active .name {
-    font-weight: 700;
-  }
-  .player--active .score {
-    font-weight: 400;
-  }
-
-  .player--active .current {
-    opacity: 1;
-  }
-
-  .current-label {
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    font-size: 1.7rem;
-    color: #ddd;
-  }
-
-  .current-score {
-    font-size: 3.5rem;
-  }
-
   /* BUTTON ELEMENTS */
   .buttons {
     position: absolute;
@@ -151,7 +126,7 @@
 
   .btn {
     position: static;
-    transform: translateY(50%);
+    transform: translateY(-80%);
     color: #5f3303;
     background: none;
     border: none;
@@ -169,21 +144,41 @@
     border-radius: 50rem;
     box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
   }
+
+  .btn--icon::first-letter {
+    font-size: 2.4rem;
+    display: inline-block;
+    margin-right: 0.7rem;
+  }
 }
 
 @layer middle {
+  .invisible {
+    opacity: 0;
+  }
+
   .score-board {
     text-align: center;
     height: 0vh;
   }
 
   .btn--selectable:active {
-    transform: translateY(40%);
+    transform: translateY(-70%);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
-  .btn::first-letter {
-    font-size: 2.4rem;
+  .btn--alert {
+    background-color: rgba(173, 241, 124, 0.8);
+    border-radius: 0.5rem;
+    width: 15rem;
+    height: 15rem;
+    margin: 0rem;
+    transform: translateY(-8rem);
+    z-index: 3;
+  }
+
+  .btn--alert::first-letter {
+    font-size: 1.8rem;
     display: inline-block;
     margin-right: 0.7rem;
   }
@@ -234,7 +229,7 @@
   }
 
   .field-info {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 300;
     color: white;
     margin-bottom: auto;
