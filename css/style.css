@@ -261,6 +261,7 @@
   }
 
   .field-image {
+    height: auto;
     width: 17rem;
   }
   /*
@@ -271,14 +272,16 @@
   }
 */
   .btn--selectable:active {
-    transform: translateY(-110%);
+    transform: translateY(-140%);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
   .btn {
     position: static;
-    transform: translateY(-120%);
-    margin: 3rem;
+    transform: translateY(-165%);
+    margin: 1.6rem;
+    padding: 0rem 0.3rem;
+    font-size: 1.3rem;
   }
 
   .btn--alert {
@@ -288,7 +291,7 @@
 
   .bid {
     font-size: 2rem;
-    height: 6rem;
+    height: 5rem;
     text-align: center;
   }
 
