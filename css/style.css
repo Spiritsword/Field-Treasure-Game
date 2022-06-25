@@ -251,5 +251,30 @@
   }
 
   .game-title {
-     font-size: 3rem;
+    font-size: 3rem;
+  }
+
+  .field-image {
+    width: 20rem;
+  }
+
+  .btn--selectable:active {
+    transform: translateY(-40%);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  .btn {
+    position: static;
+    transform: translateY(-200%);
+    margin: 1.9rem;
+  }
+
+  .btn--alert {
+    position: static;
+    transform: translateY(-75%);
+  }
+
+  .field-info {
+    font-size: 1.4rem;
+  }
 }
