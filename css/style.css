@@ -250,6 +250,12 @@
     font-size: 1.2vmax;
   }
 
+  table,
+  th,
+  td {
+    font-size: 2rem;
+  }
+
   .game-title {
     font-size: 3rem;
   }
@@ -257,7 +263,13 @@
   .field-image {
     width: 19rem;
   }
-
+  /*
+  .grass {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+*/
   .btn--selectable:active {
     transform: translateY(-180%);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
@@ -265,13 +277,13 @@
 
   .btn {
     position: static;
-    transform: translateY(-185%);
-    margin: 2.2rem;
+    transform: translateY(-190%);
+    margin: 3rem;
   }
 
   .btn--alert {
     position: static;
-    transform: translateY(-75%);
+    transform: translateY(-40%);
   }
 
   .field-info {
@@ -282,13 +294,10 @@
 
   .field-row {
     max-height: 33vh;
+    margin-top: 3rem;
   }
 
   .financials {
     max-height: 10vh;
-  }
-
-  .field-row {
-    transform: translateY(10%);
   }
 }
