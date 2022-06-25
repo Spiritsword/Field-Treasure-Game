@@ -247,6 +247,9 @@
   }
 
   html {
-    font-size: 1vmax;
+    font-size: 1.2vmax;
   }
+
+  .game-title {
+     font-size: 4rem;
 }
